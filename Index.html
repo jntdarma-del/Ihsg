@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laporan Harian IHSG — 23 Februari 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+  :root {
+    --bg: #0a0c10;
+    --surface: #111318;
+    --surface2: #181c22;
+    --border: #252b36;
+    --accent: #00e5a0;
+    --accent2: #0af;
+    --red: #ff4f6a;
+    --orange: #ffb347;
+    --yellow: #ffe066;
+    --green: #00e5a0;
+    --dim: #556070;
+    --text: #c8d4e0;
+    --textdim: #778899;
+    --white: #eaf2ff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    line-height: 1.55;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 18px 16px 60px;
+  }
+
+  /* HEADER */
+  .report-header {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 0;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .report-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent));
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px 6px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .header-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    border: 1px solid;
+    text-transform: uppercase;
+  }
+  .tag-green { color: var(--accent); border-color: var(--accent); }
+  .tag-blue  { color: var(--accent2); border-color: var(--accent2); }
+  .tag-red   { color: var(--red); border-color: var(--red); }
+  .tag-dim   { color: var(--dim); border-color: var(--border); }
+
+  .header-title {
+    text-align: center;
+    padding: 14px 16px 10px;
+  }
+  .header-title h1 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+  .header-title h1 span { color: var(--accent); }
+  .header-title .subtitle {
+    font-size: 11px;
+    color: var(--textdim);
+    margin-top: 5px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .header-meta {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    padding: 8px 16px 12px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--textdim);
+  }
+  .header-meta span b { color: var(--text); }
+
+  /* ALERT BANNER */
+  .alert-banner {
+    border: 1px solid rgba(255, 79, 106, 0.35);
+    background: rgba(255, 79, 106, 0.07);
+    padding: 8px 14px;
+    margin-bottom: 10px;
+    font-size: 11.5px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .alert-banner .alert-icon { color: var(--red); font-weight: 700; flex-shrink: 0; }
+  .alert-banner .alert-text { color: #d0bbbf; }
+  .alert-banner .alert-text b { color: var(--red); }
+
+  /* SECTION HEADERS */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .section-label .dot { color: var(--accent); }
+
+  /* 2-COLUMN LAYOUT */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  /* CARD */
+  .card {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 10px 12px;
+  }
+  .card-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--textdim);
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 5px;
+  }
+  .card-title span { color: var(--accent2); }
+
+  /* INDEX DISPLAY */
+  .ihsg-main {
+    border: 1px solid var(--accent);
+    background: var(--surface);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ihsg-main::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--accent);
+  }
+  .ihsg-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--textdim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .ihsg-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+  }
+  .ihsg-change { font-size: 13px; font-weight: 600; }
+  .chg-neg { color: var(--red); }
+  .chg-pos { color: var(--green); }
+
+  .ihsg-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-left: 1px solid var(--border);
+    padding-left: 16px;
+  }
+  .ihsg-stat {
+    padding: 2px 10px;
+    border-right: 1px solid var(--border);
+  }
+  .ihsg-stat:last-child { border-right: none; }
+  .ihsg-stat-label { font-size: 9.5px; color: var(--textdim); font-family: 'IBM Plex Mono', monospace; }
+  .ihsg-stat-val { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; color: var(--white); margin-top: 2px; }
+
+  /* LEVEL TABLE */
+  .level-table { width: 100%; border-collapse: collapse; }
+  .level-table td {
+    padding: 4px 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    border-bottom: 1px solid var(--border);
+  }
+  .level-table tr:last-child td { border-bottom: none; }
+  .level-table .lbl { color: var(--textdim); font-size: 10px; }
+  .level-table .r { text-align: right; }
+  .level-table .support { color: var(--accent); }
+  .level-table .resist  { color: var(--red); }
+  .level-table .pivot   { color: var(--orange); }
+
+  /* PREDICTION VERDICT */
+  .verdict-box {
+    border: 1px solid rgba(0, 229, 160, 0.3);
+    background: rgba(0, 229, 160, 0.05);
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  .verdict-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .verdict-main {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .verdict-detail { font-size: 11.5px; color: var(--text); line-height: 1.7; }
+  .verdict-detail b { color: var(--accent); }
+
+  /* SIGNAL BARS */
+  .signal-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+  }
+  .signal-row:last-child { border-bottom: none; }
+  .signal-name { color: var(--text); flex: 1; }
+  .signal-val  { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-align: right; min-width: 60px; }
+  .signal-bar-wrap { width: 80px; height: 6px; background: var(--surface2); margin: 0 10px; position: relative; }
+  .signal-bar { height: 100%; }
+  .bar-green { background: var(--green); }
+  .bar-red   { background: var(--red); }
+  .bar-orange{ background: var(--orange); }
+
+  /* FLOW TABLE */
+  .flow-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 6px;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+  }
+  .flow-row:last-child { border-bottom: none; }
+  .flow-name { color: var(--text); }
+  .flow-val  { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; text-align: right; }
+  .flow-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border: 1px solid;
+    text-transform: uppercase;
+  }
+  .badge-buy  { color: var(--green); border-color: var(--green); }
+  .badge-sell { color: var(--red); border-color: var(--red); }
+
+  /* GLOBAL MARKETS */
+  .mkt-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+  }
+  .mkt-row:last-child { border-bottom: none; }
+  .mkt-name  { color: var(--textdim); font-size: 10px; }
+  .mkt-price { color: var(--white); }
+  .mkt-chg   { font-size: 10px; }
+
+  /* SAHAM PILIHAN */
+  .stock-card {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+    align-items: start;
+  }
+  .stock-ticker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    min-width: 50px;
+  }
+  .stock-action {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 2px 7px;
+    border: 1px solid;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .action-buy    { color: var(--accent); border-color: var(--accent); }
+  .action-spec   { color: var(--orange); border-color: var(--orange); }
+  .action-watch  { color: var(--accent2); border-color: var(--accent2); }
+  .stock-name { font-size: 11px; color: var(--textdim); }
+  .stock-desc { font-size: 11px; color: var(--text); margin-top: 2px; line-height: 1.5; }
+  .stock-levels {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .stock-levels .sl-row { display: flex; gap: 4px; justify-content: flex-end; margin-bottom: 2px; }
+  .sl-lbl { color: var(--textdim); }
+  .sl-green { color: var(--green); }
+  .sl-red   { color: var(--red); }
+  .sl-orange{ color: var(--orange); }
+
+  /* SENTIMENT GRID */
+  .sentiment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .sentiment-item {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 10px 12px;
+  }
+  .sent-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .sent-pos { color: var(--green); border-bottom: 1px solid rgba(0,229,160,0.2); padding-bottom: 4px; margin-bottom: 6px; }
+  .sent-neg { color: var(--red); border-bottom: 1px solid rgba(255,79,106,0.2); padding-bottom: 4px; margin-bottom: 6px; }
+  .sent-item {
+    font-size: 11px;
+    color: var(--text);
+    padding: 3px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 6px;
+    line-height: 1.4;
+  }
+  .sent-item:last-child { border-bottom: none; }
+  .sent-bullet-pos { color: var(--green); flex-shrink: 0; }
+  .sent-bullet-neg { color: var(--red); flex-shrink: 0; }
+
+  /* WAVE ANALYSIS */
+  .wave-box {
+    border: 1px solid rgba(0,170,255,0.3);
+    background: rgba(0,170,255,0.04);
+    padding: 10px 12px;
+    margin-bottom: 10px;
+  }
+  .wave-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 8px;
+  }
+  .wave-text { font-size: 11.5px; color: var(--text); line-height: 1.7; }
+  .wave-text b { color: var(--yellow); }
+  .wave-text .hl { color: var(--accent2); }
+
+  /* CALENDAR */
+  .cal-item {
+    display: flex;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+  }
+  .cal-item:last-child { border-bottom: none; }
+  .cal-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--accent2);
+    min-width: 50px;
+    white-space: nowrap;
+  }
+  .cal-event { color: var(--text); }
+  .cal-impact {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    padding: 1px 5px;
+    border: 1px solid;
+    margin-left: auto;
+    white-space: nowrap;
+    height: fit-content;
+  }
+  .impact-high { color: var(--red); border-color: var(--red); }
+  .impact-mid  { color: var(--orange); border-color: var(--orange); }
+  .impact-low  { color: var(--dim); border-color: var(--border); }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    margin-top: 18px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    font-size: 10px;
+    color: var(--dim);
+    line-height: 1.6;
+  }
+  .disclaimer b { color: var(--textdim); }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    margin-top: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    color: var(--dim);
+    letter-spacing: 0.08em;
+  }
+
+  /* PROBABILITY METER */
+  .prob-wrap {
+    margin: 8px 0;
+  }
+  .prob-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    margin-bottom: 3px;
+  }
+  .prob-bar-bg {
+    height: 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .prob-fill {
+    height: 100%;
+    transition: width 0.3s;
+  }
+
+  /* SECTOR */
+  .sector-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+  }
+  .sector-row:last-child { border-bottom: none; }
+  .sector-name { flex: 1; color: var(--text); }
+  .sector-bar-bg { width: 80px; height: 5px; background: var(--surface2); position: relative; }
+  .sector-bar { height: 100%; }
+  .sector-val { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; min-width: 46px; text-align: right; }
+
+  @media (max-width: 600px) {
+    .two-col, .three-col { grid-template-columns: 1fr; }
+    .ihsg-grid { grid-template-columns: repeat(2,1fr); padding-left: 0; border-left: none; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 6px; }
+    .stock-card { grid-template-columns: 1fr 1fr; }
+    .stock-levels { grid-column: 1/-1; text-align: left; }
+    .stock-levels .sl-row { justify-content: flex-start; }
+    .sentiment-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== HEADER ====== -->
+<div class="report-header">
+  <div class="header-top">
+    <div class="header-tags">
+      <span class="tag tag-blue">▸ ANALISA PASAR</span>
+      <span class="tag tag-green">▸ IHSG</span>
+      <span class="tag tag-dim">▸ INDONESIA</span>
+      <span class="tag tag-dim">▸ FINSTOCK</span>
+    </div>
+    <div class="header-tags">
+      <span class="tag tag-green">▸ BUY ON PULLBACK</span>
+      <span class="tag tag-dim">▸ SENIN 23 FEB 2026</span>
+    </div>
+  </div>
+  <div class="header-title">
+    <h1>LAPORAN HARIAN <span>IHSG</span></h1>
+    <h1>23 FEBRUARI 2026</h1>
+    <div class="subtitle">Compiled: 22 Feb 2026 (Sun) · Minggu, 22 Februari 2026 · Ref: Analisa Pergerakan Jumat 20 Feb</div>
+  </div>
+  <div class="header-meta">
+    <span>📊 <b>IHSG CLOSE:</b> 8.271,77</span>
+    <span>📉 <b>PERF JUMAT:</b> -0,03%</span>
+    <span>📈 <b>PERF PEKAN:</b> +0,72%</span>
+    <span>💰 <b>MARKET CAP:</b> Rp14.941 T</span>
+    <span>🌐 <b>USD/IDR:</b> 16.875</span>
+  </div>
+</div>
+
+<!-- ALERT -->
+<div class="alert-banner">
+  <div class="alert-icon">⚠ PERHATIAN:</div>
+  <div class="alert-text">
+    <b>Risiko MSCI Downgrade masih membayangi.</b> IDX berencana menaikkan minimum free float dari 7,5% ke 15% — potensi tambahan supply Rp187 triliun (~$11 Miliar). Waspadai volatilitas. Investor asing mencatat net buy Rp240,57 miliar Jumat lalu. Danantara aktif di pasar sebagai penyangga.
+  </div>
+</div>
+
+<!-- ====== IHSG MAIN DISPLAY ====== -->
+<div class="section-label"><span class="dot">◆</span> SNAPSHOT IHSG — PENUTUPAN JUMAT 20 FEB 2026</div>
+<div class="ihsg-main">
+  <div>
+    <div class="ihsg-label">IDX COMPOSITE · JKSE</div>
+    <div class="ihsg-value">8.271,77</div>
+    <div class="ihsg-change chg-neg">▼ -2,31 poin &nbsp;(-0,03%)</div>
+    <div style="font-size:10px; color:var(--textdim); margin-top:4px; font-family:'IBM Plex Mono',monospace;">Penutupan · 20 Feb 2026 · 16:00 WIB</div>
+  </div>
+  <div class="ihsg-grid">
+    <div class="ihsg-stat">
+      <div class="ihsg-stat-label">OPEN</div>
+      <div class="ihsg-stat-val">8.300,22</div>
+    </div>
+    <div class="ihsg-stat">
+      <div class="ihsg-stat-label">PEKAN INI</div>
+      <div class="ihsg-stat-val chg-pos">+0,72%</div>
+    </div>
+    <div class="ihsg-stat">
+      <div class="ihsg-stat-label">VOLUME TX</div>
+      <div class="ihsg-stat-val">Rp20,4 T</div>
+    </div>
+    <div class="ihsg-stat">
+      <div class="ihsg-stat-label">PREV CLOSE</div>
+      <div class="ihsg-stat-val">8.274,08</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== PREDIKSI + SUPPORT-RESISTANCE ====== -->
+<div class="section-label"><span class="dot">◆</span> PREDIKSI PERGERAKAN IHSG — SENIN 23 FEB 2026</div>
+
+<div class="verdict-box">
+  <div class="verdict-title">◉ BIAS HARI INI: CENDERUNG MENGUAT TERBATAS / MIXED</div>
+  <div class="verdict-main">Rebound Berlanjut jika Mampu Bertahan di Atas 8.170</div>
+  <div class="verdict-detail">
+    MNC Sekuritas dan Kiwoom Sekuritas sepakat bahwa IHSG berpeluang melanjutkan penguatan terbatas di awal pekan, didorong oleh <b>momentum teknikal</b> pasca dua pekan positif berturut-turut. Kunci utama: indeks harus mampu bertahan di atas <b>support kritis 8.170</b>. Jika level ini terjaga, potensi menuju <b>resistance 8.390–8.503</b>. Terdapat tiga katalis utama: (1) perkembangan negosiasi RI–MSCI, (2) kemungkinan pembatalan tarif Trump oleh MA AS, dan (3) data M2 Bank Indonesia yang rilis 23 Feb. Wave count Elliott: IHSG sedang dalam potensi <b>wave (c) dari wave [x]</b>.
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">📐 SUPPORT &amp; RESISTANCE KEY LEVELS</div>
+    <table class="level-table">
+      <tr>
+        <td class="lbl">Resistance 2</td>
+        <td class="r resist">8.596</td>
+        <td style="font-size:9px; color:var(--dim);">Target bull ext.</td>
+      </tr>
+      <tr>
+        <td class="lbl">Resistance 1</td>
+        <td class="r resist">8.390–8.503</td>
+        <td style="font-size:9px; color:var(--dim);">Target wave (c)</td>
+      </tr>
+      <tr>
+        <td class="lbl">Pivot Area</td>
+        <td class="r pivot">8.271–8.300</td>
+        <td style="font-size:9px; color:var(--dim);">Open Senin</td>
+      </tr>
+      <tr>
+        <td class="lbl">Support 1</td>
+        <td class="r support">8.170–8.208</td>
+        <td style="font-size:9px; color:var(--dim);">Level kritis hari ini</td>
+      </tr>
+      <tr>
+        <td class="lbl">Support 2</td>
+        <td class="r support">8.025</td>
+        <td style="font-size:9px; color:var(--dim);">Last line of defense</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 PROBABILITAS SKENARIO</div>
+    <div class="prob-wrap">
+      <div class="prob-label"><span class="chg-pos">BULLISH · Wave (c) ke 8.440–8.503</span><span class="chg-pos">52%</span></div>
+      <div class="prob-bar-bg"><div class="prob-fill bar-green" style="width:52%"></div></div>
+    </div>
+    <div class="prob-wrap">
+      <div class="prob-label"><span style="color:var(--textdim)">SIDEWAYS/MIXED · Kisaran 8.170–8.390</span><span style="color:var(--textdim)">30%</span></div>
+      <div class="prob-bar-bg"><div class="prob-fill bar-orange" style="width:30%"></div></div>
+    </div>
+    <div class="prob-wrap">
+      <div class="prob-label"><span class="chg-neg">BEARISH · Break 8.170 → test 8.025</span><span class="chg-neg">18%</span></div>
+      <div class="prob-bar-bg"><div class="prob-fill bar-red" style="width:18%"></div></div>
+    </div>
+    <div style="font-size:10px; color:var(--dim); margin-top:8px; font-family:'IBM Plex Mono',monospace;">
+      Basis: Analisa teknikal MNC Sek + Kiwoom Sek + Elliott Wave. Bukan rekomendasi investasi.
+    </div>
+  </div>
+</div>
+
+<!-- ====== GLOBAL MARKETS ====== -->
+<div class="section-label"><span class="dot">◆</span> PASAR GLOBAL (JUMAT 20 FEB 2026 PENUTUPAN)</div>
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">🌐 WALL STREET &amp; <span>EROPA</span></div>
+    <div class="mkt-row">
+      <div>
+        <div class="mkt-name">S&amp;P 500</div>
+        <div class="mkt-price">5.954</div>
+      </div>
+      <div class="mkt-chg chg-neg">▼ -0,33%</div>
+    </div>
+    <div class="mkt-row">
+      <div>
+        <div class="mkt-name">DOW JONES</div>
+        <div class="mkt-price">44.546</div>
+      </div>
+      <div class="mkt-chg chg-pos">▲ +0,10%</div>
+    </div>
+    <div class="mkt-row">
+      <div>
+        <div class="mkt-name">NASDAQ</div>
+        <div class="mkt-price">19.132</div>
+      </div>
+      <div class="mkt-chg chg-neg">▼ -0,59%</div>
+    </div>
+    <div class="mkt-row">
+      <div>
+        <div class="mkt-name">FTSE 100</div>
+        <div class="mkt-price">8.659</div>
+      </div>
+      <div class="mkt-chg chg-pos">▲ +0,72%</div>
+    </div>
+    <div class="mkt-row">
+      <div>
+        <div class="mkt-name">DAX (Jerman)</div>
+        <div class="mkt-price">22.780</div>
+      </div>
+      <div class="mkt-chg chg-neg">▼ -0,29%</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🌏 ASIA &amp; <span>KOMODITAS</span></div>
+    <div class="mkt-row">
+      <div>
+        <div class="mkt-name">NIKKEI 225</div>
+        <div class="mkt-price">38.776</div>
+      </div>
+      <div class="mkt-chg chg-neg">▼ -0,21%</div>
+    </div>
+    <div class="mkt-row">
+      <div>
+        <div class="mkt-name">HANG SENG</div>
+        <div class="mkt-price">23.100</div>
+      </div>
+      <div class="mkt-chg chg-pos">▲ +0,45%</div>
+    </div>
+    <div class="mkt-row">
+      <div>
+        <div class="mkt-name">STI (Singapura)</div>
+        <div class="mkt-price">3.860</div>
+      </div>
+      <div class="mkt-chg chg-pos">▲ +0,30%</div>
+    </div>
+    <div class="mkt-row">
+      <div>
+        <div class="mkt-name">GOLD (spot)</div>
+        <div class="mkt-price">$2.937/oz</div>
+      </div>
+      <div class="mkt-chg chg-pos">▲ +0,4%</div>
+    </div>
+    <div class="mkt-row">
+      <div>
+        <div class="mkt-name">OIL BRENT</div>
+        <div class="mkt-price">$74,8/bbl</div>
+      </div>
+      <div class="mkt-chg chg-neg">▼ -0,8%</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== TECHNICAL INDICATORS ====== -->
+<div class="section-label"><span class="dot">◆</span> INDIKATOR TEKNIKAL IHSG</div>
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">📈 MOMENTUM INDICATORS</div>
+    <div class="signal-row">
+      <div class="signal-name">RSI (14)</div>
+      <div class="signal-bar-wrap"><div class="signal-bar bar-orange" style="width:55%"></div></div>
+      <div class="signal-val" style="color:var(--orange);">52,4 NETRAL</div>
+    </div>
+    <div class="signal-row">
+      <div class="signal-name">MACD</div>
+      <div class="signal-bar-wrap"><div class="signal-bar bar-green" style="width:68%"></div></div>
+      <div class="signal-val" style="color:var(--green);">BULLISH ↑</div>
+    </div>
+    <div class="signal-row">
+      <div class="signal-name">Stochastic RSI</div>
+      <div class="signal-bar-wrap"><div class="signal-bar bar-green" style="width:72%"></div></div>
+      <div class="signal-val" style="color:var(--green);">UPTREND</div>
+    </div>
+    <div class="signal-row">
+      <div class="signal-name">CCI (20)</div>
+      <div class="signal-bar-wrap"><div class="signal-bar bar-orange" style="width:50%"></div></div>
+      <div class="signal-val" style="color:var(--orange);">+18 NETRAL</div>
+    </div>
+    <div class="signal-row">
+      <div class="signal-name">Williams %R</div>
+      <div class="signal-bar-wrap"><div class="signal-bar bar-green" style="width:62%"></div></div>
+      <div class="signal-val" style="color:var(--green);">-38 SEHAT</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📉 MOVING AVERAGE &amp; TREND</div>
+    <div class="signal-row">
+      <div class="signal-name">MA20 (8.210)</div>
+      <div class="signal-bar-wrap"><div class="signal-bar bar-green" style="width:75%"></div></div>
+      <div class="signal-val" style="color:var(--green);">DI ATAS ✓</div>
+    </div>
+    <div class="signal-row">
+      <div class="signal-name">MA50 (8.195)</div>
+      <div class="signal-bar-wrap"><div class="signal-bar bar-green" style="width:70%"></div></div>
+      <div class="signal-val" style="color:var(--green);">DI ATAS ✓</div>
+    </div>
+    <div class="signal-row">
+      <div class="signal-name">MA200 (8.430)</div>
+      <div class="signal-bar-wrap"><div class="signal-bar bar-red" style="width:60%"></div></div>
+      <div class="signal-val" style="color:var(--red);">DI BAWAH ✗</div>
+    </div>
+    <div class="signal-row">
+      <div class="signal-name">Bollinger Band</div>
+      <div class="signal-bar-wrap"><div class="signal-bar bar-orange" style="width:55%"></div></div>
+      <div class="signal-val" style="color:var(--orange);">MID-BAND</div>
+    </div>
+    <div class="signal-row">
+      <div class="signal-name">Trend Utama</div>
+      <div class="signal-bar-wrap"><div class="signal-bar bar-green" style="width:60%"></div></div>
+      <div class="signal-val" style="color:var(--green);">SHORT UP</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== ELLIOTT WAVE ====== -->
+<div class="wave-box">
+  <div class="wave-label">〜 ANALISA ELLIOTT WAVE — MNC SEKURITAS (22 Feb 2026)</div>
+  <div class="wave-text">
+    Posisi IHSG saat ini diperkirakan sedang berada pada bagian dari <b>wave (c) dari wave [x]</b>. Dalam skenario optimis, selama indeks mampu bertahan di atas <span class="hl">8.170</span> sebagai level support utama, IHSG masih berpeluang melanjutkan penguatan untuk membentuk bagian dari wave ini menuju rentang <b>8.440–8.503</b>. Apabila level 8.170 ditembus ke bawah, maka bersiap mencermati area koreksi ke <span class="hl">8.025</span>. Level resistance jangka menengah berada di <b>8.596</b> yang menjadi target apabila wave berjalan sempurna.
+  </div>
+</div>
+
+<!-- ====== FLOW DATA ====== -->
+<div class="section-label"><span class="dot">◆</span> DATA ALIRAN DANA &amp; MARKET BREADTH</div>
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">💸 FOREIGN FLOW (JUMAT 20 FEB)</div>
+    <div class="flow-row">
+      <div class="flow-name">Pasar Reguler (Total)</div>
+      <div class="flow-val chg-pos">+Rp240,57 M</div>
+      <div class="flow-badge badge-buy">NET BUY</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-name">Market Cap Bursa</div>
+      <div class="flow-val chg-pos">Rp14.941 T</div>
+      <div class="flow-badge badge-buy">+0,35%</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-name">Asing Pekan 16–20 Feb</div>
+      <div class="flow-val chg-pos">+Net Buy</div>
+      <div class="flow-badge badge-buy">INFLOW</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-name">Rupiah (JISDOR)</div>
+      <div class="flow-val">Rp16.875</div>
+      <div class="flow-badge badge-buy">STABIL</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 MARKET BREADTH (JUMAT 20 FEB)</div>
+    <div class="flow-row">
+      <div class="flow-name">Saham Menguat</div>
+      <div class="flow-val chg-pos">~320</div>
+      <div></div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-name">Saham Melemah</div>
+      <div class="flow-val chg-neg">~310</div>
+      <div></div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-name">Volume Transaksi</div>
+      <div class="flow-val">Rp20,4 T</div>
+      <div></div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-name">LQ45</div>
+      <div class="flow-val chg-pos">MENGUAT ↑</div>
+      <div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== SEKTOR ====== -->
+<div class="section-label"><span class="dot">◆</span> PERKIRAAN SEKTOR HARI INI (SENIN 23 FEB)</div>
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">🟢 SEKTOR POTENSIAL MENGUAT</div>
+    <div class="sector-row">
+      <div class="sector-name">Telekomunikasi / Tech</div>
+      <div class="sector-bar-bg"><div class="sector-bar bar-green" style="width:78%"></div></div>
+      <div class="sector-val chg-pos">BULLISH</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">Infrastruktur</div>
+      <div class="sector-bar-bg"><div class="sector-bar bar-green" style="width:70%"></div></div>
+      <div class="sector-val chg-pos">POSITIF</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">Industri Dasar</div>
+      <div class="sector-bar-bg"><div class="sector-bar bar-green" style="width:65%"></div></div>
+      <div class="sector-val chg-pos">POSITIF</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">Pertambangan / Energi</div>
+      <div class="sector-bar-bg"><div class="sector-bar bar-orange" style="width:55%"></div></div>
+      <div class="sector-val" style="color:var(--orange);">NETRAL+</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔴 SEKTOR BERPOTENSI TERTEKAN</div>
+    <div class="sector-row">
+      <div class="sector-name">Konsumer Non-Siklus</div>
+      <div class="sector-bar-bg"><div class="sector-bar bar-red" style="width:70%"></div></div>
+      <div class="sector-val chg-neg">LEMAH</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">Perbankan (Big 4)</div>
+      <div class="sector-bar-bg"><div class="sector-bar bar-orange" style="width:50%"></div></div>
+      <div class="sector-val" style="color:var(--orange);">MIXED</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">Properti</div>
+      <div class="sector-bar-bg"><div class="sector-bar bar-red" style="width:55%"></div></div>
+      <div class="sector-val chg-neg">LEMAH</div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-name">Healthcare</div>
+      <div class="sector-bar-bg"><div class="sector-bar bar-orange" style="width:45%"></div></div>
+      <div class="sector-val" style="color:var(--orange);">NETRAL-</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== SENTIMEN ====== -->
+<div class="section-label"><span class="dot">◆</span> SENTIMEN PENGGERAK PASAR</div>
+<div class="sentiment-grid">
+  <div class="sentiment-item">
+    <div class="sent-title sent-pos">✦ KATALIS POSITIF</div>
+    <div class="sent-item"><span class="sent-bullet-pos">+</span><span>Kemajuan negosiasi RI–MSCI berpotensi cabut interim freeze rebalancing → sentimen positif besar</span></div>
+    <div class="sent-item"><span class="sent-bullet-pos">+</span><span>Danantara aktif beli saham valuasi menarik → penyangga IHSG dari dalam</span></div>
+    <div class="sent-item"><span class="sent-bullet-pos">+</span><span>Bank Indonesia tahan suku bunga (kelima kali) → liquidity tetap longgar</span></div>
+    <div class="sent-item"><span class="sent-bullet-pos">+</span><span>Asing net buy Rp240 M Jumat → minat mulai kembali</span></div>
+    <div class="sent-item"><span class="sent-bullet-pos">+</span><span>Prabowo hadiri Board of Peace Summit + tanda tangani trade deal AS → geopolitik membaik</span></div>
+    <div class="sent-item"><span class="sent-bullet-pos">+</span><span>Freeport mining permit diperpanjang hingga 2041 → kepastian hukum pertambangan</span></div>
+  </div>
+  <div class="sentiment-item">
+    <div class="sent-title sent-neg">✦ RISIKO &amp; TEKANAN</div>
+    <div class="sent-item"><span class="sent-bullet-neg">−</span><span>Rencana free float naik ke 15% → potensi supply Rp187 T masuk pasar, tekan harga</span></div>
+    <div class="sent-item"><span class="sent-bullet-neg">−</span><span>MSCI masih bisa downgrade ke frontier market per Mei 2026 jika tidak ada resolusi</span></div>
+    <div class="sent-item"><span class="sent-bullet-neg">−</span><span>MA200 masih di atas harga (8.430) → tekanan jual di area resistance</span></div>
+    <div class="sent-item"><span class="sent-bullet-neg">−</span><span>Wall Street mixed-negatif Jumat → sedikit berat di pembukaan</span></div>
+    <div class="sent-item"><span class="sent-bullet-neg">−</span><span>Data M2 BI rilis 23 Feb → potensi kejutan bagi likuiditas</span></div>
+    <div class="sent-item"><span class="sent-bullet-neg">−</span><span>Konsumer non-siklus dan properti masih tertekan outflow asing selektif</span></div>
+  </div>
+</div>
+
+<!-- ====== SAHAM PILIHAN ====== -->
+<div class="section-label"><span class="dot">◆</span> SAHAM PILIHAN SENIN 23 FEBRUARI 2026</div>
+
+<div class="stock-card">
+  <div>
+    <div class="stock-ticker">AMMN</div>
+    <div class="stock-name">Amman Mineral Internasional</div>
+  </div>
+  <div>
+    <div style="display:flex; gap:6px; margin-bottom:4px;">
+      <span class="stock-action action-buy">SPEC BUY</span>
+    </div>
+    <div class="stock-desc">Tembaga premium, ekspansi produksi, diuntungkan dari kepastian izin Freeport. Akumulasi tembaga global mendukung. Volume beli terpantau meningkat. Fib support area kuat.</div>
+  </div>
+  <div class="stock-levels">
+    <div class="sl-row"><span class="sl-lbl">Support</span><span class="sl-green">7.550</span></div>
+    <div class="sl-row"><span class="sl-lbl">Resist</span><span class="sl-red">8.525</span></div>
+    <div class="sl-row"><span class="sl-lbl">SL</span><span class="sl-red">&lt; 7.500</span></div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div>
+    <div class="stock-ticker">EXCL</div>
+    <div class="stock-name">XLSmart Telecom (eks-EXCL)</div>
+  </div>
+  <div>
+    <div style="display:flex; gap:6px; margin-bottom:4px;">
+      <span class="stock-action action-buy">BUY</span>
+    </div>
+    <div class="stock-desc">Merger XL-SMART selesai, efisiensi operasional tinggi. Stochastic crossing di area oversold → momentum akumulasi. Penguatan +2,1% Jumat lalu. Sektor telko jadi outperformer pekan ini.</div>
+  </div>
+  <div class="stock-levels">
+    <div class="sl-row"><span class="sl-lbl">Support</span><span class="sl-green">2.930</span></div>
+    <div class="sl-row"><span class="sl-lbl">Target</span><span class="sl-red">3.470</span></div>
+    <div class="sl-row"><span class="sl-lbl">SL</span><span class="sl-red">&lt; 2.870</span></div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div>
+    <div class="stock-ticker">BIRD</div>
+    <div class="stock-name">Blue Bird Tbk</div>
+  </div>
+  <div>
+    <div style="display:flex; gap:6px; margin-bottom:4px;">
+      <span class="stock-action action-spec">SPEC BUY</span>
+    </div>
+    <div class="stock-desc">Menguat 0,57% ke 1.750, dominasi volume pembelian. Dalam wave (v) dari wave [i] — fase akselerasi. Konsumsi transportasi premium meningkat. Support kuat 1.710.</div>
+  </div>
+  <div class="stock-levels">
+    <div class="sl-row"><span class="sl-lbl">Entry</span><span class="sl-green">1.710–1.750</span></div>
+    <div class="sl-row"><span class="sl-lbl">Target</span><span class="sl-red">1.880+</span></div>
+    <div class="sl-row"><span class="sl-lbl">SL</span><span class="sl-red">&lt; 1.710</span></div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div>
+    <div class="stock-ticker">BRMS</div>
+    <div class="stock-name">Bumi Resources Minerals</div>
+  </div>
+  <div>
+    <div style="display:flex; gap:6px; margin-bottom:4px;">
+      <span class="stock-action action-watch">BOW</span>
+    </div>
+    <div class="stock-desc">Buy on Weakness. Menguat 0,47% ke 1.060 namun tekanan jual muncul. Belum tembus MA20. Wave ii sedang koreksi sehat — tunggu entry di zona 985–1.035 untuk entry lebih aman.</div>
+  </div>
+  <div class="stock-levels">
+    <div class="sl-row"><span class="sl-lbl">BOW</span><span class="sl-green">985–1.035</span></div>
+    <div class="sl-row"><span class="sl-lbl">Target</span><span class="sl-red">1.120–1.225</span></div>
+    <div class="sl-row"><span class="sl-lbl">SL</span><span class="sl-red">&lt; 900</span></div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div>
+    <div class="stock-ticker">UNTR</div>
+    <div class="stock-name">United Tractors Tbk</div>
+  </div>
+  <div>
+    <div style="display:flex; gap:6px; margin-bottom:4px;">
+      <span class="stock-action action-buy">BUY</span>
+    </div>
+    <div class="stock-desc">Menguat 2,0% Jumat lalu, volume solid. Profitabilitas kuat dari alat berat & batu bara. Harga komoditas batubara stabil. Blue chip defensif yang baik untuk menjaga portofolio.</div>
+  </div>
+  <div class="stock-levels">
+    <div class="sl-row"><span class="sl-lbl">Support</span><span class="sl-green">26.200</span></div>
+    <div class="sl-row"><span class="sl-lbl">Target</span><span class="sl-red">28.000+</span></div>
+    <div class="sl-row"><span class="sl-lbl">SL</span><span class="sl-red">&lt; 25.500</span></div>
+  </div>
+</div>
+
+<!-- ====== KALENDER EKONOMI ====== -->
+<div class="section-label"><span class="dot">◆</span> KALENDER EKONOMI PEKAN 23–27 FEB 2026</div>
+<div class="card" style="margin-bottom:10px;">
+  <div class="card-title">📅 EVENT PENTING YANG PERLU DIMONITOR</div>
+  <div class="cal-item">
+    <div class="cal-date">23 FEB</div>
+    <div class="cal-event"><b>Data M2 Money Supply Bank Indonesia</b> — Indikator kunci likuiditas domestik. Jika M2 melambat → tekanan rupiah dan IHSG. Jika ekspansif → sentiment positif.</div>
+    <span class="cal-impact impact-high">HIGH</span>
+  </div>
+  <div class="cal-item">
+    <div class="cal-date">24 FEB</div>
+    <div class="cal-event">Keputusan & tindak lanjut negosiasi IDX–MSCI mengenai transparansi free float. Setiap pengumuman positif dapat memicu rally signifikan.</div>
+    <span class="cal-impact impact-high">HIGH</span>
+  </div>
+  <div class="cal-item">
+    <div class="cal-date">25 FEB</div>
+    <div class="cal-event">Rilis data PMI Manufaktur Indonesia Februari 2026. Konsensus: tetap ekspansif di atas 50. Konfirmasi momentum pertumbuhan industri.</div>
+    <span class="cal-impact impact-mid">MED</span>
+  </div>
+  <div class="cal-item">
+    <div class="cal-date">26 FEB</div>
+    <div class="cal-event">Data PCE Price Index AS (Februari) — Indikator inflasi favorit The Fed. Jika tinggi → risiko suku bunga tinggi lebih lama → tekan emerging market.</div>
+    <span class="cal-impact impact-mid">MED</span>
+  </div>
+  <div class="cal-item">
+    <div class="cal-date">27 FEB</div>
+    <div class="cal-event">Laporan data neraca perdagangan Indonesia Januari 2026. Ekspektasi surplus tipis seiring ekspor nikel & kelapa sawit.</div>
+    <span class="cal-impact impact-low">LOW</span>
+  </div>
+</div>
+
+<!-- ====== TRADING STRATEGY ====== -->
+<div class="section-label"><span class="dot">◆</span> STRATEGI TRADING HARI INI</div>
+<div class="verdict-box" style="border-color:rgba(0,170,255,0.3); background:rgba(0,170,255,0.05);">
+  <div class="verdict-title" style="color:var(--accent2);">◉ TRADING PLAN SENIN 23 FEBRUARI 2026</div>
+  <div class="verdict-detail">
+    <b>➤ Posisi Utama:</b> HOLD saham yang sudah profit, tambah di level support jika ada koreksi pagi.<br>
+    <b>➤ Entry Agresif:</b> Buka posisi EXCL, AMMN di pembukaan jika IHSG naik konfirmasi di atas 8.300.<br>
+    <b>➤ Entry Konservatif:</b> Tunggu pull-back ke zona 8.170–8.208 sebelum add position IHSG reksa dana/ETF.<br>
+    <b>➤ Trigger Cut Loss:</b> Jika IHSG break 8.025 secara convincing (volume tinggi) → reduce exposure.<br>
+    <b>➤ Watch Catalyst:</b> Pantau rilis data M2 BI jam 10:00–11:00 WIB. Reaksi pasar terhadap data ini dapat menjadi sinyal arah sesi siang.<br>
+    <b>➤ Risk Management:</b> Maksimalkan 1:2 risk-reward. SL -3% dari entry, target profit +6%.
+  </div>
+</div>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer">
+  <b>DISCLAIMER:</b> Laporan ini dibuat untuk tujuan informasi dan edukasi semata berdasarkan data publik, analisa teknikal, dan riset dari berbagai sekuritas (MNC Sekuritas, Kiwoom Sekuritas, Ajaib Sekuritas). Laporan ini BUKAN merupakan rekomendasi investasi. Keputusan investasi sepenuhnya ada di tangan pembaca. Investasi di pasar saham mengandung risiko kerugian. Pastikan untuk selalu melakukan analisa mandiri dan konsultasikan dengan advisor keuangan sebelum mengambil keputusan.
+</div>
+
+<div class="footer">
+  LAPORAN HARIAN IHSG · 23 FEBRUARI 2026 · DATA PER PENUTUPAN 20 FEBRUARI 2026 · GENERATED SUNDAY 22 FEB 2026
+</div>
+
+</body>
+</html>
+

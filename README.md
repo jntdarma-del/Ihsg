@@ -1,2 +1,0 @@
-# Ihsg
-Ihsg daily
